@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gunship: Hacienda Defense</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Cpath d='M16 4v9M16 19v9M4 16h9M19 16h9' stroke='%23fff' stroke-width='2.5'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <canvas id="gl"></canvas>
+    <canvas id="overlay"></canvas>
+
+    <div id="hud" class="hidden">
+      <div class="panel tl">
+        <div class="callsign"><span class="sig"></span>WARHAMMER</div>
+        <div class="online">ONLINE</div>
+        <div id="hud-nav" class="nav"></div>
+      </div>
+      <div class="panel tr">
+        <span id="hud-sensor" class="sensor-box">DAYLIGHT</span><span id="hud-sensor2" class="sensor2">NORM</span>
+      </div>
+      <div id="hud-game" class="panel tc"></div>
+      <div class="panel bl geo">GEOPOINT<br />INS NAV 0.42<br />TDK COR</div>
+      <div id="hud-weapons" class="panel br"></div>
+      <div id="hud-status" class="panel bs"></div>
+      <div id="hud-radio" class="panel bc"></div>
+    </div>
+
+    <div id="banner" class="hidden">
+      <div id="banner-title"></div>
+      <div id="banner-sub"></div>
+    </div>
+
+    <div id="screen-menu" class="screen">
+      <div class="box">
+        <div class="eyebrow">CALLSIGN WARHAMMER // CLOSE AIR SUPPORT</div>
+        <h1>GUNSHIP</h1>
+        <div class="subtitle">HACIENDA DEFENSE &middot; ENDLESS</div>
+        <p class="brief">
+          You are the gunner on an AC-130 circling a ranch where our team is holding the hacienda. Cartel gunmen and
+          technicals attack in waves, and every wave is bigger than the last. Clear a wave to earn a short breather, then
+          the next one comes. It ends when the compound falls. On thermal, friendlies wear <b>flashing IR strobes</b>; on the
+          daylight camera they wear tan. Don't shoot them.
+        </p>
+        <div class="h">LOADOUT</div>
+        <div class="loadout">
+          <div class="card"><img src="assets/ui/round_25.png" alt="" /><div class="n">25MM HEI</div><div class="d">Gatling. Fast, overheats.</div></div>
+          <div class="card"><img src="assets/ui/round_40.png" alt="" /><div class="n">40MM HEI</div><div class="d">Autocannon. 6-round clips.</div></div>
+          <div class="card"><img src="assets/ui/round_105.png" alt="" /><div class="n">105MM HE</div><div class="d">Howitzer. Huge blast, 4 s reload.</div></div>
+          <div class="card"><img src="assets/ui/gbu.png" alt="" /><div class="n">GBU</div><div class="d">Guided bomb. Locks the nearest vehicle.</div></div>
+        </div>
+        <div class="cols">
+          <div class="controls">
+            <div class="h">CONTROLS</div>
+            <div><kbd>MOUSE</kbd> slew the sensor</div>
+            <div><kbd>LMB</kbd> fire (hold for 25mm)</div>
+            <div><kbd>RMB</kbd> / <kbd>Z</kbd> zoom 1x / 2x / 3x</div>
+            <div><kbd>1</kbd> 25mm &nbsp;<kbd>2</kbd> 40mm &nbsp;<kbd>3</kbd> 105mm &nbsp;<kbd>4</kbd> GBU</div>
+            <div><kbd>Q</kbd> / <kbd>WHEEL</kbd> cycle weapon</div>
+            <div><kbd>R</kbd> reload 40mm</div>
+            <div><kbd>F</kbd> daylight / rainbow thermal / black thermal</div>
+            <div><kbd>H</kbd> target boxes on / off</div>
+            <div><kbd>ENTER</kbd> skip intermission</div>
+            <div><kbd>M</kbd> mute &nbsp;<kbd>ESC</kbd> pause</div>
+            <div class="tip">Shells take 1.5&ndash;2 s to land. Lead moving targets.</div>
+          </div>
+          <div class="scores">
+            <div class="h">TOP SCORES</div>
+            <div id="menu-scores"></div>
+          </div>
+        </div>
+        <label class="sens no-start">
+          <span>SENSITIVITY</span>
+          <input id="sens" type="range" min="0.4" max="2.5" step="0.05" value="1" />
+          <span id="sens-val">1.00x</span>
+        </label>
+        <div id="menu-loading" class="loading">LOADING ASSETS 0%</div>
+        <div id="menu-cta" class="cta hidden">CLICK TO DEPLOY</div>
+      </div>
+    </div>
+
+    <div id="screen-pause" class="screen menu-screen hidden">
+      <div class="box small">
+        <h2>PAUSED</h2>
+        <div class="buttons">
+          <button id="pause-resume" class="btn primary">RESUME</button>
+          <button id="pause-exit" class="btn">EXIT TO MAIN MENU</button>
+        </div>
+        <div class="hint">ENTER to resume &middot; exiting abandons this run</div>
+      </div>
+    </div>
+
+    <div id="screen-over" class="screen menu-screen hidden">
+      <div class="box">
+        <div class="eyebrow">COMPOUND LOST</div>
+        <h2>FINAL SCORE</h2>
+        <div id="over-score" class="big-score"></div>
+        <div id="over-rank" class="rank"></div>
+        <div id="over-stats" class="stats"></div>
+        <div class="h">TOP SCORES</div>
+        <div id="over-scores"></div>
+        <div class="buttons">
+          <button id="over-again" class="btn primary">REDEPLOY</button>
+          <button id="over-menu" class="btn">MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <pre id="debug" class="hidden"></pre>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

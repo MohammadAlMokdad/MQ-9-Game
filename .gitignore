@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Tool caches
+.vite/
+.cache/
+.eslintcache
+__pycache__/
+*.py[cod]
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editor, OS and assistant settings
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Blender backups
+*.blend1
+
+# Raw source downloads (several hundred MB of glTF, textures and .blend files).
+# The game never loads them: the converted, runtime copies live in public/assets/.
+# They are only needed to rebuild assets; see "Rebuilding the assets" in README.md.
+/claude's demanded 3d models/
+/date_palm/
+/missles/
+/realistic_trees_collection/
+
+# The Sketchfab Standard licence does not allow redistributing this model on its own.
+# The game falls back to the bundled low-poly pickup when the file is missing.
+/public/assets/models/vehicles/technical.glb

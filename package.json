@@ -1,0 +1,20 @@
+{
+  "name": "gunship-fob-defense",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Endless AC-130 thermal wave-defense game. Protect the FOB, chase the high score.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sim:waves": "node scripts/sim-waves.mjs",
+    "build:trees": "node scripts/build-trees.mjs"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.3"
+  }
+}
